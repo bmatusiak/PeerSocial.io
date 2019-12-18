@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Cloud9</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> 
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body>
+    <link rel="stylesheet" type="text/css" href="./plugins/c9.ide.layout.classic/loading-flat.css" />
+    <div id="loadingcontainer" class="">
+        <div id="loadingide">
+            <div class="cool-message">Loading offline ide example</div>
+            <div class="status" style="display:none"><div class="spinner"></div></div>
+            
+            <div id="content" class="loading-progress">
+            </div>
+            <div class="footer">
+                <a href="https://docs.c9.io">Documentation</a> | 
+                <a href="http://status.c9.io">Server Status</a> | 
+                <a href="http://support.c9.io">Support</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
+    <script>
+        
+        var gun = Gun(['https://peersocial.herokuapp.com/gun', 'https://gunjs.herokuapp.com/gun']);
+    
+        window.gun = gun;
+        
+        var loadingIde = document.querySelector("#loadingide");
+        document.body.className = "loading " + loadingIde.className;
+    
+        setTimeout(function(){
+            var s = document.querySelector("#loadingide .status");
+            if (s) s.style.display = "block";
+        }, 2000);
+        
+        window.hideLoader = function(){
+            var loader = document.getElementById("loadingcontainer");
+            loader.parentNode.removeChild(loader);
+            
+            document.body.className = document.body.className.replace("loading " + loadingIde.className, "");
+        };
+    </script>
+
+    <script src="./build/standalone/config/default.js"></script>
+
+    <!--
+    <script src="/static/mini_require.js"></script>
+    <script src="/configs/require_config.js"></script>
+-->
+    
+    <script src="./c9_index.js"></script>
+</body>
+</html>
+
