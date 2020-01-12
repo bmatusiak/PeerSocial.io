@@ -11,6 +11,16 @@ require('gun/axe');
 var app = express();
 app.use(express.static(__dirname + "/public"));
 
+
+
+var GUNDIR = require('path').dirname(require.resolve("gun"));
+app.use("/fido2-onlykey/gun/examples/",express.static(GUNDIR + "/examples"));
+var commonify = require(__dirname+ "/public/fido2-onlykey/commonify.js");
+app.use('/fido2-onlykey/gunjs/', commonify(GUNDIR));
+app.use('/fido2-onlykey/commonify/', commonify(__dirname+ "/public/fido2-onlykey/public"));
+
+app.use("/fido2-onlykey/",express.static(__dirname+ "/public/fido2-onlykey/public"));
+
 app.use(Gun.serve);
 
 
